@@ -7,13 +7,13 @@ describe('Teste ServeRest', () => {
   it('Validação de login com usuario cadastrado adm', () => {
 
 
-    cy.get('[data-testid="email"]').type("di@teste.com")
+    cy.get('[data-testid="email"]').type("dteste123@gmail.com")
     cy.get('[data-testid="senha"]').type("123456")
     cy.get('[data-testid="entrar"]').click()
     cy.get('.lead').should("exist")
   })
 
-  it('Validação de login com sucesso de usuario normal ', () => {
+  it.only('Validação de login com sucesso de usuario normal ', () => {
 
 
     cy.get('[data-testid="email"]').type("droxo63@gmail.com")

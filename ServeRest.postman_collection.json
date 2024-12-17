@@ -18,7 +18,28 @@
 								"exec": [
 									"const resposta = pm.response.json();\r",
 									"pm.globals.set(\"token\", resposta.authorization);\r",
-									""
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Login realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é  200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de token\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Bearer\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"    });\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Email e/ou senha inválidos\");\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -68,12 +89,39 @@
 			"item": [
 				{
 					"name": "Cadastrar usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validar mensgem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n\r\n\r\n{\r\n  \"nome\": \"Di\",\r\n  \"email\": \"droxo63@gmail.com\",\r\n  \"password\": \"Di123456\",\r\n  \"administrador\": \"true\"\r\n\r\n}",
+							"raw": "\r\n\r\n\r\n{\r\n  \"nome\": \"Diego\",\r\n  \"email\": \"diteste@teste1.com\",\r\n  \"password\": \"Di123456\",\r\n  \"administrador\": \"true\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -96,6 +144,24 @@
 				},
 				{
 					"name": "Listar usuarios",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar e-mail\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"diteste@teste1.com\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -112,15 +178,14 @@
 							}
 						},
 						"url": {
-							"raw": "https://serverest.dev/usuarios/979AUVbAA05oGlEJ",
+							"raw": "https://serverest.dev/usuariosvmXKEpZFzvBU3IFQ",
 							"protocol": "https",
 							"host": [
 								"serverest",
 								"dev"
 							],
 							"path": [
-								"usuarios",
-								"979AUVbAA05oGlEJ"
+								"usuariosvmXKEpZFzvBU3IFQ"
 							],
 							"query": [
 								{
@@ -140,32 +205,51 @@
 				},
 				{
 					"name": "Busca por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar nome do usuario\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Diego\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://serverest.dev/usuarios?_id=vmXKEpZFzvBU3IFQ",
+							"raw": "https://serverest.dev/usuarios/?_id=CnbxvKKU5cu5yUxe",
 							"protocol": "https",
 							"host": [
 								"serverest",
 								"dev"
 							],
 							"path": [
-								"usuarios"
+								"usuarios",
+								""
 							],
 							"query": [
 								{
 									"key": "_id",
-									"value": "CnbxvKKU5cu5yUxe",
-									"disabled": true
-								},
-								{
-									"key": "_id",
-									"value": "vmXKEpZFzvBU3IFQ"
+									"value": "CnbxvKKU5cu5yUxe"
 								},
 								{
 									"key": "_id",
 									"value": "979AUVbAA05oGlEJ",
+									"disabled": true
+								},
+								{
+									"key": "_id",
+									"value": "m1ErZ8IITsC1HwfY",
 									"disabled": true
 								}
 							]
@@ -175,12 +259,42 @@
 				},
 				{
 					"name": "Alterar ususario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar string do codigo\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "   {\r\n      \"nome\": \"diego\",\r\n      \"email\": \"droxo@teste2.com\",\r\n      \"password\": \"Di123456\",\r\n      \"administrador\": \"false\"\r\n\r\n    }",
+							"raw": "   {\r\n      \"nome\": \"Diego\",\r\n      \"email\": \"droxo63@teste5.com\",\r\n      \"password\": \"123456\",\r\n      \"administrador\": \"false\"\r\n\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -204,11 +318,33 @@
 				},
 				{
 					"name": "deletar ususario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de exclusão\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Registro excluído com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Nenhum registro excluído\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://serverest.dev/usuarios/vmXKEpZFzvBU3IFQ",
+							"raw": "https://serverest.dev/usuarios/YiGQrvr0cJFgHQR3",
 							"protocol": "https",
 							"host": [
 								"serverest",
@@ -216,7 +352,7 @@
 							],
 							"path": [
 								"usuarios",
-								"vmXKEpZFzvBU3IFQ"
+								"YiGQrvr0cJFgHQR3"
 							]
 						}
 					},
@@ -229,6 +365,33 @@
 			"item": [
 				{
 					"name": "Cadastrar produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Já existe produto com esse nome\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -240,7 +403,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"LG TV 60'\",\r\n  \"preco\": 2500,\r\n  \"descricao\": \"Smart TV\",\r\n  \"quantidade\": 1000\r\n}\r\n\r\n\r\n",
+							"raw": "{\r\n  \"nome\": \"Remote Samsung 50'\",\r\n  \"preco\": 50,\r\n  \"descricao\": \"TV Remote Control\",\r\n  \"quantidade\": 100\r\n}\r\n\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -262,7 +425,95 @@
 					"response": []
 				},
 				{
+					"name": "Listar produtos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Samsung 77\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://serverest.dev/produtos/sV8oR58jK8AgThqv",
+							"protocol": "https",
+							"host": [
+								"serverest",
+								"dev"
+							],
+							"path": [
+								"produtos",
+								"sV8oR58jK8AgThqv"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Di",
+									"disabled": true
+								},
+								{
+									"key": "nome",
+									"value": "diego",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Buscar produto por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar nome do produto\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Remote Samsung\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Produto não encontrado\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -282,7 +533,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://serverest.dev/produtos/?_id=6rr6wFfhikvmuxYm",
+							"raw": "https://serverest.dev/produtos/sV8oR58jK8AgThqv",
 							"protocol": "https",
 							"host": [
 								"serverest",
@@ -290,7 +541,7 @@
 							],
 							"path": [
 								"produtos",
-								""
+								"sV8oR58jK8AgThqv"
 							],
 							"query": [
 								{
@@ -307,10 +558,6 @@
 									"key": "_id",
 									"value": "jTNrFohH3DVzpNzW",
 									"disabled": true
-								},
-								{
-									"key": "_id",
-									"value": "6rr6wFfhikvmuxYm"
 								}
 							]
 						}
@@ -319,6 +566,36 @@
 				},
 				{
 					"name": "Editar produto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar string status code\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Já existe produto com esse nome\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -330,7 +607,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n     {\r\n        \"nome\": \"LG TV 55'\",\r\n        \"preco\": 3000,\r\n        \"descricao\": \"Smart TV\",\r\n        \"quantidade\": 50\r\n     }",
+							"raw": "\r\n     {\r\n        \"nome\": \"Samsung 77'\",\r\n        \"preco\": 5000,\r\n        \"descricao\": \"Smart TV Samsung\",\r\n        \"quantidade\": 50\r\n     }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -354,6 +631,28 @@
 				},
 				{
 					"name": "Deletar produtos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de exclusão com sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Registro excluído com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Nenhum registro excluído\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -373,7 +672,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://serverest.dev/produtos/A67looFDIPBQ8WID",
+							"raw": "https://serverest.dev/produtos/zP9J9aTEnCUpiAJw",
 							"protocol": "https",
 							"host": [
 								"serverest",
@@ -381,7 +680,7 @@
 							],
 							"path": [
 								"produtos",
-								"A67looFDIPBQ8WID"
+								"zP9J9aTEnCUpiAJw"
 							]
 						}
 					},
@@ -394,6 +693,38 @@
 			"item": [
 				{
 					"name": "Cadastrar carrinhos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Validar mensagem de sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Produto não encontrado\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Não é permitido ter mais de 1 carrinho\");\r",
+									"    });\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -405,7 +736,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"produtos\": [\r\n\r\n    {\r\n      \"idProduto\": \"6rr6wFfhikvmuxYm\",\r\n      \"quantidade\": 50\r\n    }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"produtos\": [\r\n\r\n    {\r\n      \"idProduto\": \"sV8oR58jK8AgThqv\",\r\n      \"quantidade\": 20\r\n    }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -428,18 +759,44 @@
 				},
 				{
 					"name": "Buscar carrinho por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar id do produto\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"3JkBxVvvhFUnZKgc\");\r",
+									"});\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Carrinho não encontrado\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://serverest.dev/carrinhos?_id=i65C3wQqypQ8IBq7&_id=BnDpyBancN7j9Km2",
+							"raw": "https://serverest.dev/carrinhos/3JkBxVvvhFUnZKgc",
 							"protocol": "https",
 							"host": [
 								"serverest",
 								"dev"
 							],
 							"path": [
-								"carrinhos"
+								"carrinhos",
+								"3JkBxVvvhFUnZKgc"
 							],
 							"query": [
 								{
@@ -454,11 +811,13 @@
 								},
 								{
 									"key": "_id",
-									"value": "i65C3wQqypQ8IBq7"
+									"value": "i65C3wQqypQ8IBq7",
+									"disabled": true
 								},
 								{
 									"key": "_id",
-									"value": "BnDpyBancN7j9Km2"
+									"value": "BnDpyBancN7j9Km2",
+									"disabled": true
 								}
 							]
 						}
@@ -467,11 +826,39 @@
 				},
 				{
 					"name": "Listar carrinho cadastrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar id do produto\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"3JkBxVvvhFUnZKgc\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code é 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Carrinho não encontrado\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://serverest.dev/carrinhos/BnDpyBancN7j9Km2",
+							"raw": "https://serverest.dev/carrinhos/",
 							"protocol": "https",
 							"host": [
 								"serverest",
@@ -479,7 +866,7 @@
 							],
 							"path": [
 								"carrinhos",
-								"BnDpyBancN7j9Km2"
+								""
 							],
 							"query": [
 								{
@@ -494,6 +881,28 @@
 				},
 				{
 					"name": "Deletar carrinho - compra concluida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de exclusão com sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Registro excluído com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Não foi encontrado carrinho para esse usuário\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -520,6 +929,28 @@
 				},
 				{
 					"name": "Cancelar compra e retornar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code é 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de exclusão com sucesso\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Registro excluído com sucesso. Estoque dos produtos reabastecido\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar mensagem de erro\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Não foi encontrado carrinho para esse usuário\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [

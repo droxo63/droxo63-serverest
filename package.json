@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+"scripts": {
+  "cy:open": "cypress open",
+  "cy:run": "cypress run",
+  "cy:run:dashboard": "cypress run --record --key de838e4b-93a8-437b-bbc4-2147fc8bdbbb",
+  "cy:report": "npx mochawesome-merge cypress/reports/*.json > cypress/reports/report.json && npx marge cypress/reports/report.json -f report -o cypress/reports/html"
+},
+
   "keywords": [],
   "author": "",
   "license": "ISC",

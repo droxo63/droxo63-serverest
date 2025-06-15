@@ -21,12 +21,12 @@ describe('Teste ServeRest', () => {
     it('Deve selecionar um produto', () => {
         produtosPage.visitarUrl()   
         produtosPage.selecionarProduto()
-        cy.get('.especificacoes > :nth-child(4)').should("exist")
-       // cy.get('[data-testid="product-detail-name"]').contains("nulla")
+       cy.get('.especificacoes > h2.title').contains("Detalhes")
+       
 
     });
 
-    it.skip('Deve visitar pagina do produto', () => {
+    it('Deve visitar pagina do produto', () => {
         
        cy.visit('produtos')
        

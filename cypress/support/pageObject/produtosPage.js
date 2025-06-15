@@ -6,13 +6,13 @@ class ProdutosPage {
     }
 
     buscarProduto(){
-        cy.get('[data-testid="pesquisar"]').type("Iphone 21")
+        cy.get('[data-testid="pesquisar"]').type("Produto Existente")
         cy.get('[data-testid="botaoPesquisar"]').click()
-        cy.get('.card-link').click()
+       cy.get('[href="/detalhesProduto/NOU7o3ANxghQ07us"] > .card-link').click()
     }
     selecionarProduto(){
         //cy.get(':nth-child(9) > .card-body > :nth-child(1) > .imagem').click()
-        cy.get('[href="/detalhesProduto/4Gtyf2UVyZptcycc"] > .card-link').click()
+        cy.get('[href="/detalhesProduto/5lwHfIma6pPbC4wb"] > .card-link').click()
     }
     
 

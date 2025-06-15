@@ -14,7 +14,7 @@ it('Validação de cadastro com erro de email repetido- dados fixos', () => {
   cy.get('[data-testid="email"]').type("droxo63@gmail.com")
   cy.get('[data-testid="password"]').type("123456")
   cy.get('[data-testid="cadastrar"]').click()
-  cy.wait(4000)
+  //cy.wait(4000)
   cy.get('.alert > :nth-child(2)').contains("Este email já está sendo usado")
 
 })

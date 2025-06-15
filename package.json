@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
 "scripts": {
+  "start": "node server.js",
   "cy:open": "cypress open",
   "cy:run": "cypress run",
   "cy:run:dashboard": "cypress run --record --key de838e4b-93a8-437b-bbc4-2147fc8bdbbb",
